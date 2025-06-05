@@ -1,0 +1,76 @@
+# C Compilation Stages - Explanation
+
+This README explains the different steps of compiling a C program using the example `sample.c`.  
+We go from C source code to a final executable in four main stages.
+
+## Step 1: Preprocessing (`-E`)
+
+```bash
+gcc -E sample.c -o solutions/sample.i
+```
+
+**What happens:**  
+The preprocessor expands all `#include` and macros.  
+In `sample.i`, the code of `stdio.h` is included directly.  
+You can see many lines added from system headers.  
+It is still readable C code.
+
+## Step 2: Compilation to Assembly (`-S`)
+
+```bash
+gcc -S solutions/sample.i -o solutions/sample.s
+```
+
+**What happens:**  
+The compiler converts the preprocessed C code into **assembly code**.  
+`sample.s` contains low-level instructions for the CPU.  
+You can find instructions for `printf` and `return`.
+
+## Step 3: Assembling (`-c`)
+
+```bash
+gcc -c solutions/sample.s -o solutions/sample.o
+```
+
+**What happens:**  
+The assembler translates the assembly code into **machine code**.  
+This creates an object file `sample.o`.  
+It is a binary file, not human-readable.  
+You can check its type using:
+
+```bash
+file solutions/sample.o
+```
+
+## Step 4: Linking
+
+```bash
+gcc solutions/sample.o -o solutions/sample
+```
+
+**What happens:**  
+The linker connects the object file with the necessary libraries (like `libc`).  
+It produces the final executable `sample`.
+
+## Step 5: Run the Program
+
+```bash
+./solutions/sample
+```
+
+**Output:**
+
+```
+Hello, PP7!
+```
+
+## Summary
+
+| Stage        | Command                              | File created         | Description                              |
+|--------------|---------------------------------------|----------------------|------------------------------------------|
+| Preprocessing| `gcc -E`                             | `sample.i`           | Expands headers and macros               |
+| Compilation  | `gcc -S`                             | `sample.s`           | Creates assembly code                    |
+| Assembling   | `gcc -c`                             | `sample.o`           | Makes object file (machine code)         |
+| Linking      | `gcc` (no flag)                      | `sample`             | Produces final executable                |
+
+Each step is important to understand how C code becomes a working program.
