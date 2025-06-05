@@ -180,3 +180,5 @@ In this exercise you will:
 ---
 
 **Remember:** Stop working after **90 minutes** and record where you stopped.
+
+90 Minutes
